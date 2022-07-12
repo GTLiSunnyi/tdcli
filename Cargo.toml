@@ -1,0 +1,56 @@
+[package]
+name = "tdcli"
+version = "0.1.0"
+authors = ["tianle"]
+edition = "2021"
+
+[features]
+default = ["evm", "crypto_sm"]
+# default = ["evm", "crypto_eth"]
+
+evm = []
+chaincode = [] # unimplemented yet
+
+crypto_sm = ["libsm", "efficient-sm2"]
+crypto_eth = ["aes", "ctr", "tiny-keccak", "secp256k1"]
+
+
+[dependencies]
+protobuf = "2"
+grpc = "0.8.3"
+grpc-protobuf = "0.8.3"
+futures = "0.3.19"
+clap = "3.0.5"
+clap_complete = "3.0.2"
+hex = "0.4"
+tokio = { version = "1.6", features = ["full"] }
+rand = "0.8"
+tonic = "0.6.2"
+prost = "0.9"
+time = { version = "0.3.5", features = ["formatting", "local-offset"] }
+serde = "1.0"
+serde_json = "1.0"
+lazy_static = "1.4.0"
+anyhow = "1.0"
+home = "0.5.3"
+rustbreak = { version = "2.0", features = ["ron_enc"] }
+indicatif = "0.16.2"
+rayon = "1.5.1"
+tentacle-multiaddr = "0.3.1"
+
+# crypto_sm
+libsm = { version = "0.4.0", optional = true }
+efficient-sm2 = { version = "0.1.5", optional = true }
+
+# crypto_eth
+aes = { version = "0.7", optional = true }
+ctr = { version = "0.7", optional = true }
+tiny-keccak = { version = "2.0", features = ["keccak"], optional = true }
+secp256k1 = { version = "0.20", features = ["rand-std", "recovery"], optional = true }
+
+[build-dependencies]
+tonic-build = "0.6.2"
+protoc-rust-grpc = "0.8.3"
+
+[profile.release]
+lto = true

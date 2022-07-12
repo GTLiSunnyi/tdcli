@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package dSpace;
+
+message CallRequest {
+    string To = 1;
+    string Data = 2;
+}
+
+message CallResponse {
+    string Response = 1;
+}
+
+message SendRequest {
+    string To = 1;
+    string Data = 2;
+}
+
+message SendResponse {
+    string Response = 1;
+}
+
+message ReceiptRequest {
+    string TxHash = 1;
+}
+
+message ReceiptResponse {
+    string Response = 1;
+}
+
+message CreateAccountRequest {
+    string Id = 1;
+}
+
+message CreateAccountResponse {
+    string Response = 1;
+}
+
+service DSpaceService {
+    rpc Call(CallRequest) returns (CallResponse);
+    rpc Send(SendRequest) returns (SendResponse);
+    rpc Receipt(ReceiptRequest) returns (ReceiptResponse);
+    rpc CreateAccount(CreateAccountRequest) returns (CreateAccountResponse);
+}
